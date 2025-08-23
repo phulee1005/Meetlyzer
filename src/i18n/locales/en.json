@@ -317,7 +317,7 @@
     "emailRequired": "Please enter your email",
     "emailInvalid": "Invalid email format",
     "passwordRequired": "Please enter your password",
-    "passwordMinLength": "Password must be at least 6 characters",
+    "passwordMinLength": "Password must be at least 8 characters",
     "nameRequired": "Please enter your name",
     "nameMinLength": "Name must be at least 2 characters",
     "phoneRequired": "Please enter your phone number",
@@ -327,7 +327,8 @@
     "ERROR_NOT_FOUND": "Account not found",
     "ERROR_ALREADY_EXISTS": "Email already exists",
     "ERROR_OTP_WRONG": "OTP is incorrect",
-    "ERROR_OTP_EXP": "OTP has expired"
+    "ERROR_OTP_EXP": "OTP has expired",
+    "passwordNotMatch": "Password does not match"
   },
   "error": {
     "networkFailed": "Cannot connect to server. Please check your network connection and ensure the backend is running.",
@@ -355,5 +356,21 @@
     "retry": "Retry",
     "cancel": "Cancel",
     "featureComingSoon": "Feature coming soon"
+  },
+  "changePassword": {
+    "title": "Change Password",
+    "oldPassword": "Old Password",
+    "newPassword": "New Password",
+    "confirmPassword": "Confirm Password",
+    "changePassword": "Change Password",
+    "changePasswordSuccess": "Password changed successfully!"
+  },
+  "resetPassword": {
+    "title": "Reset Password",
+    "newPassword": "New Password",
+    "confirmPassword": "Confirm Password",
+    "resetPassword": "Reset Password",
+    "resetPasswordSuccess": "Password reset successfully!",
+    "resetPasswordError": "Failed to reset password"
   }
 } 

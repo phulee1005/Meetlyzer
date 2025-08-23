@@ -1,5 +1,5 @@
-import { useRef } from "react";
-import { Animated, Keyboard } from "react-native";
+import { useRef, useEffect } from "react";
+import { Animated, Keyboard, KeyboardEvent } from "react-native";
 import { heightScale } from "../utils/scale";
 
 interface UseKeyboardAnimationProps {
@@ -13,6 +13,7 @@ interface UseKeyboardAnimationProps {
   bgImageOpacityValue?: number;
   animationDuration?: number;
   opacityDuration?: number;
+  autoListenKeyboard?: boolean;
 }
 
 export const useKeyboardAnimation = ({
@@ -26,6 +27,7 @@ export const useKeyboardAnimation = ({
   bgImageOpacityValue = 0,
   animationDuration = 300,
   opacityDuration = 400,
+  autoListenKeyboard = false,
 }: UseKeyboardAnimationProps = {}) => {
   const defaultBgImageTranslateY = useRef(new Animated.Value(0)).current;
   const defaultBgImageOpacity = useRef(new Animated.Value(1)).current;
@@ -77,6 +79,30 @@ export const useKeyboardAnimation = ({
       }),
     ]).start();
   };
+
+  // Auto listen keyboard events
+  useEffect(() => {
+    if (!autoListenKeyboard) return;
+
+    const keyboardDidShowListener = Keyboard.addListener(
+      "keyboardWillShow",
+      () => {
+        handleInputFocus();
+      }
+    );
+
+    const keyboardDidHideListener = Keyboard.addListener(
+      "keyboardWillHide",
+      () => {
+        handleInputBlur();
+      }
+    );
+
+    return () => {
+      keyboardDidShowListener?.remove();
+      keyboardDidHideListener?.remove();
+    };
+  }, []);
 
   return {
     bgImageTranslateY: finalBgImageTranslateY,

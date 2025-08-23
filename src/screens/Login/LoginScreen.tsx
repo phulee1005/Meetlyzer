@@ -21,6 +21,8 @@ import { useKeyboardAnimation } from "hooks/useKeyboardAnimation";
 import { Colors } from "constants/colors";
 import { useLogin } from "./useLogin";
 import { RootStackParamList } from "@navigation/type";
+import * as AuthSession from "expo-auth-session";
+
 import { showInfo } from "@components/CustomModal";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Login">;
@@ -35,8 +37,9 @@ export default function LoginScreen({ navigation }: Props) {
     bgImageOpacity,
     contentTranslateY,
     handleInputFocus,
-    handleInputBlur,
-  } = useKeyboardAnimation();
+  } = useKeyboardAnimation({
+    autoListenKeyboard: true,
+  });
 
   const { login, googleLogin, isLoading, error, clearError, validateForm } =
     useLogin();
@@ -116,7 +119,6 @@ export default function LoginScreen({ navigation }: Props) {
               leftIcon="mail-outline"
               keyboardType="email-address"
               onFocus={handleInputFocus}
-              onBlur={handleInputBlur}
             />
             <CustomTextInput
               placeholder={t("login.password")}
@@ -127,12 +129,11 @@ export default function LoginScreen({ navigation }: Props) {
               rightIcon={showPassword ? "eye-off-outline" : "eye-outline"}
               onRightIconPress={() => setShowPassword(!showPassword)}
               onFocus={handleInputFocus}
-              onBlur={handleInputBlur}
             />
             <TouchableOpacity
               style={styles.forgotBtn}
               onPress={() => {
-                showInfo(t("modal.featureComingSoon"), t("modal.info"));
+                navigation.navigate("ForgotPassword");
               }}
             >
               <Text style={styles.forgotText}>{t("login.forgotPassword")}</Text>

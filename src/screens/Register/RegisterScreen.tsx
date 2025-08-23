@@ -35,8 +35,9 @@ export default function RegisterScreen({ navigation }: Props) {
     bgImageOpacity,
     contentTranslateY,
     handleInputFocus,
-    handleInputBlur,
-  } = useKeyboardAnimation();
+  } = useKeyboardAnimation({
+    autoListenKeyboard: true,
+  });
 
   const { register, isLoading, error, clearError, validateForm } =
     useRegister();
@@ -102,7 +103,6 @@ export default function RegisterScreen({ navigation }: Props) {
               leftIcon="mail-outline"
               keyboardType="email-address"
               onFocus={handleInputFocus}
-              onBlur={handleInputBlur}
             />
             <CustomTextInput
               placeholder={t("register.name")}
@@ -110,7 +110,6 @@ export default function RegisterScreen({ navigation }: Props) {
               onChangeText={setName}
               leftIcon="person-outline"
               onFocus={handleInputFocus}
-              onBlur={handleInputBlur}
             />
             <CustomTextInput
               placeholder={t("register.password")}
@@ -121,7 +120,6 @@ export default function RegisterScreen({ navigation }: Props) {
               rightIcon={showPassword ? "eye-off-outline" : "eye-outline"}
               onRightIconPress={() => setShowPassword(!showPassword)}
               onFocus={handleInputFocus}
-              onBlur={handleInputBlur}
             />
 
             <ButtonLoading
@@ -129,7 +127,7 @@ export default function RegisterScreen({ navigation }: Props) {
               title={t("register.registerButton")}
               isLoading={isLoading}
             />
-            <Text style={styles.orText}>{t("register.or")}</Text>
+            <Text style={styles.orText}>{t("login.or")}</Text>
             <View style={styles.socialRow}>
               <TouchableOpacity style={styles.socialBtn}>
                 <Ionicons

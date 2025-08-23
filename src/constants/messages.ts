@@ -8,6 +8,7 @@ export const Messages = {
     NAME_MIN_LENGTH: "validation.nameMinLength",
     PHONE_REQUIRED: "validation.phoneRequired",
     PHONE_INVALID: "validation.phoneInvalid",
+    PASSWORD_NOT_MATCH: "validation.passwordNotMatch",
   },
   ERROR: {
     NETWORK_FAILED: "error.networkFailed",

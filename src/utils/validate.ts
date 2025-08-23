@@ -7,7 +7,7 @@ export const validateEmail = (email: string): boolean => {
 };
 
 export const validatePassword = (password: string): boolean => {
-  return password.length >= 6;
+  return password.length >= 8;
 };
 
 export const validateName = (name: string): boolean => {
@@ -55,6 +55,19 @@ export const createValidationWithMessages = (t: (key: string) => string) => {
     return null;
   };
 
+  const validatePasswordMatch = (
+    password: string,
+    confirmPassword: string
+  ): string | null => {
+    if (!validateRequired(confirmPassword)) {
+      return t(Messages.VALIDATION.PASSWORD_REQUIRED);
+    }
+    if (password !== confirmPassword) {
+      return t(Messages.VALIDATION.PASSWORD_NOT_MATCH);
+    }
+    return null;
+  };
+
   const validatePhoneWithMessage = (phone: string): string | null => {
     if (!validateRequired(phone)) {
       return t("validation.phoneRequired");
@@ -95,6 +108,41 @@ export const createValidationWithMessages = (t: (key: string) => string) => {
     return null;
   };
 
+  const validateChangePasswordForm = (
+    oldPassword: string,
+    newPassword: string,
+    confirmPassword: string
+  ): string | null => {
+    const oldPasswordError = validatePasswordWithMessage(oldPassword);
+    if (oldPasswordError) return oldPasswordError;
+
+    const newPasswordError = validatePasswordWithMessage(newPassword);
+    if (newPasswordError) return newPasswordError;
+
+    const confirmPasswordError = validatePasswordMatch(
+      newPassword,
+      confirmPassword
+    );
+    if (confirmPasswordError) return confirmPasswordError;
+
+    return null;
+  };
+
+  const validateResetPasswordForm = (
+    newPassword: string,
+    confirmPassword: string
+  ): string | null => {
+    const newPasswordError = validatePasswordWithMessage(newPassword);
+    if (newPasswordError) return newPasswordError;
+
+    const confirmPasswordError = validatePasswordMatch(
+      newPassword,
+      confirmPassword
+    );
+    if (confirmPasswordError) return confirmPasswordError;
+
+    return null;
+  };
   return {
     validateEmail: validateEmailWithMessage,
     validatePassword: validatePasswordWithMessage,
@@ -102,6 +150,8 @@ export const createValidationWithMessages = (t: (key: string) => string) => {
     validatePhone: validatePhoneWithMessage,
     validateLoginForm,
     validateRegisterForm,
+    validateChangePasswordForm,
+    validateResetPasswordForm,
   };
 };
 

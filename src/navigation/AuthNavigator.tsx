@@ -4,6 +4,7 @@ import RegisterScreen from "@screens/Register/RegisterScreen";
 import OTPVerificationScreen from "@screens/OTPVerification/OTPVerificationScreen";
 import { Stack } from "@navigation/type";
 import navigatorName from "constants/navigatorName";
+import ForgotPasswordScreen from "@screens/ForgotPassword/ForgotPasswordScreen";
 
 const { LOGIN, REGISTER } = navigatorName;
 
@@ -27,6 +28,11 @@ export default function AuthNavigator() {
       <Stack.Screen
         name="OTPVerification"
         component={OTPVerificationScreen}
+        options={{ headerShown: false, presentation: "card" }}
+      />
+      <Stack.Screen
+        name="ForgotPassword"
+        component={ForgotPasswordScreen}
         options={{ headerShown: false, presentation: "card" }}
       />
     </Stack.Navigator>

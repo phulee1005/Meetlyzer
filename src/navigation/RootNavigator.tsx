@@ -9,6 +9,8 @@ import { Stack, RootStackParamList } from "@navigation/type";
 import { useSelector } from "react-redux";
 import { useNavigation, NavigationProp } from "@react-navigation/native";
 import navigatorName from "constants/navigatorName";
+import ChangePassword from "@screens/ChangePassword/ChangePassword";
+import ResetPasswordScreen from "@screens/ResetPassword/ResetPasswordScreen";
 
 export default function RootNavigator() {
   const { AUTH, TAB } = navigatorName;
@@ -71,6 +73,21 @@ export default function RootNavigator() {
         component={JoinMeetingScreen}
         options={{
           headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="ChangePassword"
+        component={ChangePassword}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="ResetPassword"
+        component={ResetPasswordScreen}
+        options={{
+          headerShown: false,
+          gestureEnabled: false,
         }}
       />
     </Stack.Navigator>

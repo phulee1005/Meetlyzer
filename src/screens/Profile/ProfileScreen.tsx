@@ -11,13 +11,16 @@ import ProfileMenuItem from "@components/ProfileMenuItem";
 import LogoutButton from "@components/LogoutButton";
 import VersionInfo from "@components/VersionInfo";
 import { useLanguage } from "hooks/useLanguage";
+import { RootStackParamList } from "@navigation/type";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
-export default function ProfileScreen() {
+type Props = NativeStackScreenProps<RootStackParamList, "Profile">;
+
+export default function ProfileScreen({ navigation }: Props) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const { currentLanguage, changeLanguage } = useLanguage();
   const userInfo = useSelector((state: RootState) => state.user.userInfo);
-
   const handleLogout = () => {
     dispatch(clearUser());
   };
@@ -27,9 +30,7 @@ export default function ProfileScreen() {
   };
 
   const handleChangePassword = () => {
-    Alert.alert(t("profile.comingSoon"), t("profile.featureDescription"), [
-      { text: t("modal.ok") },
-    ]);
+    navigation.navigate("ChangePassword");
   };
 
   return (
@@ -58,7 +59,6 @@ export default function ProfileScreen() {
 
         <ProfileMenuItem
           title={t("profile.changePassword")}
-          subtitle={t("profile.comingSoon")}
           onPress={handleChangePassword}
         />
       </View>

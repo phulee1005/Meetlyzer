@@ -39,20 +39,20 @@ export default function MainTabNavigator() {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
-        tabBarIcon: ({ color, size }) => {
+        tabBarIcon: ({ focused, color, size }) => {
           let iconName;
           if (route.name === "Home") {
-            iconName = "home-outline";
+            iconName = focused ? "home" : "home-outline";
           } else if (route.name === "Calendar") {
-            iconName = "calendar-outline";
+            iconName = focused ? "calendar" : "calendar-outline";
           } else if (route.name === "Document") {
-            iconName = "document-text-outline";
+            iconName = focused ? "document-text" : "document-text-outline";
           } else if (route.name === "Profile") {
-            iconName = "person-outline";
+            iconName = focused ? "person" : "person-outline";
           }
           return <Ionicons name={iconName as any} size={size} color={color} />;
         },
-        tabBarActiveTintColor: Colors.blue,
+        tabBarActiveTintColor: Colors.primaryText,
         tabBarInactiveTintColor: Colors.secondaryText,
         tabBarStyle: {
           backgroundColor: Colors.white,

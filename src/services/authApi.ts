@@ -16,6 +16,38 @@ interface OTPResponse {
   message?: string;
 }
 
+interface ChangePasswordRequest {
+  oldPassword: string;
+  newPassword: string;
+}
+
+interface ChangePasswordResponse {
+  success: boolean;
+  message?: string;
+}
+
+interface ForgotPasswordRequest {
+  email: string;
+  redirectUri: string;
+  backendUri: string;
+}
+
+interface ForgotPasswordResponse {
+  success: boolean;
+  message?: string;
+}
+
+interface ResetPasswordRequest {
+  email: string;
+  accessKey: string;
+  newPassword: string;
+}
+
+interface ResetPasswordResponse {
+  success: boolean;
+  message?: string;
+}
+
 export const authApi = api.injectEndpoints({
   endpoints: (builder) => ({
     login: builder.mutation<RTKResponse<LoginResponse>, LoginRequest>({
@@ -64,6 +96,36 @@ export const authApi = api.injectEndpoints({
         body: data,
       }),
     }),
+    changePassword: builder.mutation<
+      RTKResponse<ChangePasswordResponse>,
+      ChangePasswordRequest
+    >({
+      query: (data) => ({
+        url: "/auth/change-password",
+        method: "POST",
+        body: data,
+      }),
+    }),
+    forgotPassword: builder.mutation<
+      RTKResponse<ForgotPasswordResponse>,
+      ForgotPasswordRequest
+    >({
+      query: (data) => ({
+        url: "/auth/forget-password",
+        method: "POST",
+        body: data,
+      }),
+    }),
+    resetPassword: builder.mutation<
+      RTKResponse<ResetPasswordResponse>,
+      ResetPasswordRequest
+    >({
+      query: (data) => ({
+        url: "/auth/verify-change-password",
+        method: "POST",
+        body: data,
+      }),
+    }),
   }),
 });
 
@@ -73,4 +135,7 @@ export const {
   useGoogleAuthMutation,
   useVerifyOTPMutation,
   useResendOTPMutation,
+  useChangePasswordMutation,
+  useForgotPasswordMutation,
+  useResetPasswordMutation,
 } = authApi;

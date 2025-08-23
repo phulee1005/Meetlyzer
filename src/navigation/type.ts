@@ -30,6 +30,9 @@ export type RootStackParamList = {
     platform: string;
     meetingCode: string;
   };
+  ChangePassword: undefined;
+  ResetPassword: { email: string; accessKey: string };
+  ForgotPassword: undefined;
 };
 
 export type TabParamList = {
