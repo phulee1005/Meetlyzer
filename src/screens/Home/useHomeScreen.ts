@@ -116,7 +116,8 @@ export const useHomeScreen = () => {
   }, []);
 
   const handleJoinLivePressFromEmpty = useCallback(() => {
-    setShowJoinLiveModal(true);
+    // setShowJoinLiveModal(true);
+    handleCommingSoon();
   }, []);
 
   const handleJoinLiveModalClose = useCallback(() => {
@@ -178,30 +179,31 @@ export const useHomeScreen = () => {
   }, []);
 
   const handleToggleGoogleCalendar = useCallback(async () => {
-    if (!userInfo) return;
+    handleCommingSoon();
+    // if (!userInfo) return;
 
-    const isRegistered = googleCalendarData?.response?.registerGoogleCalendar;
+    // const isRegistered = googleCalendarData?.response?.registerGoogleCalendar;
 
-    if (isRegistered) {
-      try {
-        const result = await unregisterCalendar().unwrap();
-        if (result?.success) {
-          refetchGoogleCalendar();
-        }
-      } catch (error: any) {
-        console.error("Unregister calendar error:", error);
-      }
-    } else {
-      try {
-        const res = await googleSignInService.registerCalendar(userInfo.email);
-        const result = await registerCalendar(res).unwrap();
-        if (result?.success) {
-          refetchGoogleCalendar();
-        }
-      } catch (error: any) {
-        console.error("Register calendar error:", error);
-      }
-    }
+    // if (isRegistered) {
+    //   try {
+    //     const result = await unregisterCalendar().unwrap();
+    //     if (result?.success) {
+    //       refetchGoogleCalendar();
+    //     }
+    //   } catch (error: any) {
+    //     console.error("Unregister calendar error:", error);
+    //   }
+    // } else {
+    //   try {
+    //     const res = await googleSignInService.registerCalendar(userInfo.email);
+    //     const result = await registerCalendar(res).unwrap();
+    //     if (result?.success) {
+    //       refetchGoogleCalendar();
+    //     }
+    //   } catch (error: any) {
+    //     console.error("Register calendar error:", error);
+    //   }
+    // }
   }, [
     userInfo,
     googleCalendarData,
