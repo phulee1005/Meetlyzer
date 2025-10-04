@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { StyleSheet, ScrollView, SafeAreaView } from "react-native";
 import { Colors } from "constants/colors";
 import Header from "components/Header";

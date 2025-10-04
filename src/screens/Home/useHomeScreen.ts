@@ -12,7 +12,7 @@ import {
 } from "@store/uploadSlice";
 import { useUploadMeetingMutation } from "services/uploadApi";
 import { Alert } from "react-native";
-import { showSuccess } from "components/CustomModal";
+import { showInfo, showSuccess } from "components/CustomModal";
 import { Language } from "components/JoinLiveModal";
 import { validateMeetingLink } from "utils/validate";
 import {
@@ -42,6 +42,10 @@ export const useHomeScreen = () => {
   const [showJoinLiveModal, setShowJoinLiveModal] = useState(false);
   const [showGoogleCalendarModal, setShowGoogleCalendarModal] = useState(false);
   const userInfo = useSelector((state: RootState) => state.user.userInfo);
+
+  const handleCommingSoon = useCallback(() => {
+    showInfo(t("modal.featureComingSoon"));
+  }, []);
 
   const [uploadMeeting, { isLoading: isUploading }] =
     useUploadMeetingMutation();
@@ -107,7 +111,8 @@ export const useHomeScreen = () => {
   }, []);
 
   const handleJoinLivePress = useCallback(() => {
-    setShowJoinLiveModal(true);
+    // setShowJoinLiveModal(true);
+    handleCommingSoon();
   }, []);
 
   const handleJoinLivePressFromEmpty = useCallback(() => {
@@ -164,7 +169,8 @@ export const useHomeScreen = () => {
   );
 
   const handleSchedulePress = useCallback(() => {
-    setShowGoogleCalendarModal(true);
+    // setShowGoogleCalendarModal(true);
+    handleCommingSoon();
   }, []);
 
   const handleGoogleCalendarModalClose = useCallback(() => {
